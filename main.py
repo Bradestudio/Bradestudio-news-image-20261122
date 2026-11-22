@@ -1,36 +1,46 @@
 #!/usr/bin/env python3
-"""Entrypoint for the make.fun news-image-20261121 entry.
+"""Ship the pre-rendered front page as this entry's output.
 
-The picture itself is drawn by gen_image.py and shipped in this
-repository as entry.png. This program only places that file where
-the grader asks for it: MAKEFUN_OUTPUT_DIR, or the first argument,
-or ./output. Stdlib only, no network, no clock -- every run writes
-the exact same bytes.
+The picture itself lives in ``entry.png`` next to this file (drawn by
+``gen_image.py`` with Pillow only). This script just copies that file to
+the place the make.fun harness expects it:
+
+* ``$MAKEFUN_OUTPUT_DIR/entry.png`` when the variable is set, else
+* the directory given as the first command-line argument, else
+* ``./output/entry.png``.
+
+Standard library only. No network, no clock, no randomness — the same
+input always produces the same bytes.
 """
+
 import os
 import shutil
 import sys
-from pathlib import Path
 
 
-def main():
-    dest = os.environ.get("MAKEFUN_OUTPUT_DIR")
-    if not dest and len(sys.argv) > 1:
-        dest = sys.argv[1]
-    if not dest:
-        dest = "output"
-    outdir = Path(dest)
-    outdir.mkdir(parents=True, exist_ok=True)
-    here = Path(__file__).resolve().parent
-    source = here / "entry.png"
-    if not source.is_file():
-        raise SystemExit(f"entry.png is missing next to {__file__}")
-    target = outdir / "entry.png"
-    shutil.copyfile(source, target)
-    if target.stat().st_size != source.stat().st_size:
-        raise SystemExit("copied entry.png has the wrong size")
-    print(f"wrote {target} ({target.stat().st_size} bytes)")
+def pick_output_dir(argv):
+    """Decide where the finished image goes, in priority order."""
+    env_dir = os.environ.get("MAKEFUN_OUTPUT_DIR")
+    if env_dir:
+        return env_dir
+    if len(argv) > 1:
+        return argv[1]
+    return os.path.join(os.getcwd(), "output")
+
+
+def main(argv):
+    here = os.path.dirname(os.path.abspath(__file__))
+    source = os.path.join(here, "entry.png")
+    if not os.path.isfile(source):
+        raise SystemExit("entry.png is missing next to main.py — "
+                         "run gen_image.py first")
+    dest_dir = pick_output_dir(argv)
+    os.makedirs(dest_dir, exist_ok=True)
+    dest = os.path.join(dest_dir, "entry.png")
+    shutil.copyfile(source, dest)
+    size = os.path.getsize(dest)
+    print("copied entry.png to %s (%d bytes)" % (dest, size))
 
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv)

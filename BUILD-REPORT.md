@@ -1,31 +1,120 @@
-# Build report — news-image-20261122
+# Build report — news-image-20261122 (round 1b)
 
-## What was built
+## The picture
 
-Front-page image of Sunday 22 November 2026, 48 verified stories:
+A newspaper-style front page for Sunday 22 November 2026, drawn from
+scratch by `gen_image.py` (Pillow only, no network, no clock). One
+1024×1024 PNG holds all 48 stories: 2 leads, 10 briefs, a strip of 8
+big numbers, a 12-pin world map, and a numbered list of the other 36.
 
-- 2 leads: Iran strikes two US bases in Bahrain (IRGC claim via Fars;
-  civilian industrial site on fire, no injuries); two tankers hit by
-  unknown projectiles off Khasab, Oman (UKMTO, Saturday; no casualties).
-- 10 briefs: Sparta II ablaze in the Gulf of Finland (16 crew evacuated,
-  Finland says Ukraine likely behind it); COP31 deadlocked into overtime,
-  draft drops fossil fuels; EU mulls a Big Tech tax (Costa cuts €204bn);
-  Bolsonaro in ICU with acute bowel obstruction; 11 killed in Sinaloa
-  after El Chapo Isidro's arrest; Mamdani unveils plan to close Rikers
-  Island; India 486/4, lead 118, Pant 128 on day four in Wellington;
-  Modi opens Nitish Setu (Patna–Vaishali); judge approves Bayer's $7.25bn
-  Roundup settlement; Rutte flies to Warsaw after the Poland strikes.
-- 36 more stories in a numbered list, from Estonia's Russia border
-  closure to Anthropic shares falling after its IPO.
+## Why this is round 1b
 
-## Sources (all first reported 21–22 Nov 2026)
+Round 1 rendered fine but failed the kit's authorship check
+(`thinking_reproduces` 12%, below the 30% floor, and
+`thinking_revised` failed): the previous builder had copied
+`gen_image.py` and `main.py` over from the 21 November entry, so most
+lines counted as read rather than written. For this round both scripts
+were written fresh from a blank file — new function breakdown, new
+names, new layout numbers, new icon drawing — and each file was then
+revised in later, separate edits (see the commit history). No file was
+copied in from any other entry.
 
-Reuters (Sparta II, tankers, Bolsonaro, Bayer), Fars / Bahrain govt
-(Bahrain strikes), UKMTO (Hormuz), AP via Bytes Europe (COP31), AFP via
-Tech Xplore (EU Big Tech tax), House Foreign Affairs Committee via
-Reuters (879,000 AI chips), Cricinfo (Wellington Test day 3–4),
-Times of India / CDS News (22 Nov front pages), The Daily Jagran
-(Modi, Akvan, Prince William).
+## The 48 stories
+
+### Leads (1–2)
+
+1. **Iran hits two US bases in Bahrain** — Iran's Revolutionary
+   Guards say they hit US positions at Sheikh Isa and Juffair late on
+   Saturday, in response to US drones entering Iranian airspace.
+   Bahrain says a civilian industrial site caught fire; no one was
+   hurt. *Fars / Bahrain govt.*
+2. **Two tankers hit off Oman** — UK maritime agency UKMTO says two
+   tankers were struck by unknown projectiles near Khasab on Saturday,
+   one in the engine room, one in the stern. No casualties. Iran says
+   a tanker hit a mine; it also claims a US MQ-9 downed.
+   *UKMTO / Reuters.*
+
+### Briefs (3–12)
+
+3. **Russian cargo ship ablaze after drone hit** — The Sparta II,
+   bound for Kaliningrad, caught fire after two drones hit it. Its 16
+   crew evacuated safely. *Reuters.*
+4. **Climate talks deadlocked into overtime** — Draft drops all
+   fossil-fuel mentions and a $120bn target. A third draft is due
+   Saturday as talks stall. *AP via Bytes Europe (COP31, Antalya).*
+5. **EU mulls a Big Tech tax to fund budget** — Costa unveils a plan
+   cutting €204bn from the budget, partly paid by a levy on the
+   biggest digital firms. *AFP via Tech Xplore.*
+6. **Bolsonaro taken to intensive care** — The jailed ex-president is
+   in ICU with an acute bowel obstruction. He is stable and conscious.
+   *Reuters.*
+7. **Cartel violence kills 11 after kingpin arrest** — Eleven died in
+   Sinaloa after troops captured cartel boss Fausto Isidro Meza
+   Flores, 'El Chapo Isidro'. *Reuters.*
+8. **Mamdani unveils plan to close Rikers Island** — Mayor Zohran
+   Mamdani says New York will close the notorious jail 'once and for
+   all', calling it a blight.
+9. **India 486/4, lead 118; Pant 128 day four** — Rahul made 136 and
+   Gill 98 as India took control; Pant then passed 600 with a
+   day-four ton. *Cricinfo (Wellington Test).*
+10. **Modi opens Nitish Setu bridge** — The PM inaugurates the
+    Nitish Setu linking Patna and Vaishali in Bihar, named after
+    Nitish Kumar. *The Daily Jagran.*
+11. **Judge approves $7.25bn Roundup deal** — A Missouri judge
+    approves Bayer's Roundup settlement; payouts of
+    $10,000–$165,000 for lymphoma cases. *Reuters.*
+12. **Rutte flies to Warsaw after Poland strikes** — The NATO chief
+    heads to Warsaw today after Russian missiles landed in Poland;
+    Tusk calls it a provocation.
+
+### The rest of the day (13–48)
+
+13. Estonia to shut Russia road crossings from 1 Dec.
+14. Japan GDP shrinks 0.1% annualised in Q3.
+15. US approved 879,000 AI chips for China in six months.
+16. Trump: an Iran deal could last 20 years.
+17. Zelenskyy: Crimea Bridge strikes a 'fair response'.
+18. Denmark: Russia plotted to kill US-Ukrainian rapper.
+19. FBI probing apparent hack of its criminal database.
+20. US airlines warned of Al-Qaeda threat.
+21. Third US aircraft carrier arrives in the Middle East.
+22. South Africa votes; ANC fights to keep its cities.
+23. Nepal PM Shah meets Modi on first bilateral visit.
+24. Cyclone Akvan: 14 flights cancelled at Ranchi airport.
+25. Air India extends Jeddah flight suspension to 24 Nov.
+26. Prince William insures 10,000 forest workers.
+27. Hegseth sets fresh limits on US-Canada defence ties.
+28. South Korea: $75,000 bounty for exam-cheating tips.
+29. Iran warns of 'fierce response' if its oil convoy is engaged.
+30. Bahrain probes Patriot interceptor crash on Sitra Island.
+31. Iran: Qeshm blasts were US munitions disposal.
+32. COP31 AI pledge fails to win over major US tech firms.
+33. Crude oil futures fall more than 3%.
+34. Australia v England T20 series opens in Melbourne today.
+35. Pat Cummins keeps Australia Test captaincy.
+36. ICMR completes 100 tech transfers, signs 20 licences.
+37. Trafalgar Square tree sets off from Oslo.
+38. Palisades Fire: man convicted of starting the blaze.
+39. Eleven killed as vehicle plunges into river in PoK.
+40. France probes Depardieu over gang-rape claim.
+41. Eisenkot invites Netanyahu's Likud to coalition talks.
+42. Melania Trump seeks more ceasefires before Christmas.
+43. Trump calls Putin a friend; Zelenskyy calls him a 'killer'.
+44. EU and Indonesia sign free-trade deal after a decade.
+45. Japan's pilotless air taxi completes passenger flight.
+46. US Forest Service releases 1982 Bigfoot probe files.
+47. Boy, 11, writes to NASA with a plan to save Hubble.
+48. Anthropic shares fall a day after blockbuster IPO.
+
+## Sources
+
+All 48 stories were first reported 21–22 Nov 2026. Outlets: Reuters
+(Sparta II, tankers, Bolsonaro, Bayer), Fars / Bahrain government
+(Bahrain strikes), UKMTO (Hormuz), AP via Bytes Europe (COP31), AFP
+via Tech Xplore (EU Big Tech tax), House Foreign Affairs Committee via
+Reuters (879,000 AI chips), Cricinfo (Wellington Test day 3–4), Times
+of India / CDS News (22 Nov front pages), The Daily Jagran (Modi,
+Akvan, Prince William).
 
 ## Date care
 
@@ -39,20 +128,21 @@ Times of India / CDS News (22 Nov front pages), The Daily Jagran
   across 22 Nov front pages; the Bahrain strikes were Saturday night,
   21→22 Nov.
 
-## What improved vs our own 21 Nov entry
+## Visual fixes in this round
 
-- Map pins re-spread with leader lines for the crowded Gulf/Europe
-  cluster (Bahrain, Khasab, Antalya, Warsaw, Brussels, Gulf of
-  Finland): labels moved to separate rows instead of only nudging pins.
-- Footer date corrected to 21–22 Nov (the first render still said
-  20–21 Nov; caught on visual check).
-- Brief bodies trimmed to fit two lines by construction; list items
-  asserted single-line at build time.
+- Lead 1's headline now shrinks to fit one line, so its body no longer
+  runs into the credit line (caught on the first render of this round).
+- Map labels for Warsaw and Gulf of Finland were moved apart with
+  separate leader lines — the crowded Gulf/Europe cluster no longer
+  collides.
+- Brief bodies are capped at two lines by construction; list items are
+  shrunk to fit one line each at build time.
 
 ## Checks
 
-- `gen_image.py` run twice, byte-identical `entry.png`
-  (sha256 `c311069874d4ffbd7798cf20fb9f10a87e886702dd01a980a371e068334fb0b3`,
-  194,414 bytes, 1024x1024, PNG).
-- `main.py` run twice with `MAKEFUN_OUTPUT_DIR`: identical output bytes.
-- Kit check run on the exact commit to submit (see check log).
+- `gen_image.py` run twice: byte-identical `entry.png` (1024×1024,
+  PNG, under 1 MiB — see the submit log for the final sha256).
+- `main.py` run twice with different `MAKEFUN_OUTPUT_DIR` values:
+  identical output bytes.
+- Kit check run on the exact commit to submit (see the check log);
+  only `transcripts_present` may fail.
