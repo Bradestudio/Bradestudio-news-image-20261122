@@ -146,3 +146,70 @@ Akvan, Prince William).
   identical output bytes.
 - Kit check run on the exact commit to submit (see the check log);
   only `transcripts_present` may fail.
+
+
+---
+
+# Build report — news-image-20261122 (round 2)
+
+## What changed vs round 1
+
+Round 1 scored 0.968674 (outside the top 100; cutoff 0.987563) with
+no illustrated hero at all — every top story was text only. Round 2
+rebuilds the page around what the diagnosis found:
+
+- Three large illustrated hero panels, drawn in code: Bahrain at
+  night (base silhouettes, two blasts, drones, moon), the tankers off
+  Oman at dusk (two hulls, fire, a spiked mine), and the Sparta II
+  burning in the Gulf of Finland (containers, flames, rescue tug).
+- A "THE DAY IN UTC" timeline with six moments (times marked
+  approximate, with "times approximate · UTC" printed on the strip).
+- Certainty tags on every hero and brief: REPORTED (confirmed by
+  officials or wires), CLAIM (one side's account — the Bahrain
+  strikes), FORECAST (a plan or proposal — the EU tax, the Rikers
+  closure plan).
+- The map is now a dot-matrix world map (continents as ellipses,
+  sampled on a fixed grid) with 12 numbered pins whose labels were
+  hand-placed with per-pin offsets — Wellington's label sits to the
+  left of its pin, inside the frame.
+- A DATE CHECK footer names the Peru M6.9 quake (20 Nov local,
+  21 Nov 00:09 UTC) as deliberately left out, and says Japan's GDP
+  fall and Estonia's border closure are older announcements shown as
+  live follow-ups, not 22 Nov events.
+- The 48 stories are unchanged from round 1 (same verified list),
+  restructured as 3 heroes + 9 briefs + 36 in the list. One
+  correction from fresh verification: the Sparta II was hit west of
+  Gogland Island in the eastern Gulf of Finland (not just "the
+  Baltic"), and its hero and pin now say so.
+
+## Authorship
+
+Both entrypoint files were written fresh from a blank file in this
+session — new layout, new function breakdown, new names, new
+illustration code — and each was then revised in later, separate
+edits. No file was copied in from round 1 or any other entry.
+
+## Visual fixes during this round
+
+- First render: smoke ellipses and explosion bursts spilled above the
+  hero panels and covered the masthead. All blast, flame and smoke
+  shapes were moved and shrunk to stay inside their panels, and the
+  round smoke blobs became lumpy three-ellipse puffs.
+- First render: timeline times and the BY THE NUMBERS labels collided
+  with the next section's title. The whole vertical budget was
+  re-laid out (timeline line lower, numbers and briefs shifted down,
+  map shortened to 122 px, list rows at 10.3 px).
+- First render: the "GULF OF FINLAND" map label was clamped into the
+  pin cluster and overlapped Warsaw. Labels now use hand-placed
+  per-pin offsets and the clamp allows them just above the map box.
+- Hero bodies were cut mid-sentence at two lines; they now start
+  right under the headline and run to three lines, and were shortened
+  to ~125–150 characters so each one ends cleanly.
+
+## Checks
+
+- `gen_image.py` run twice: byte-identical `entry.png` (1024×1024,
+  PNG, under 1 MiB — see the verification below).
+- `main.py` run twice with different `MAKEFUN_OUTPUT_DIR` values:
+  identical output bytes.
+

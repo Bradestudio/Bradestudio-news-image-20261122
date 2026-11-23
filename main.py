@@ -1,25 +1,29 @@
 #!/usr/bin/env python3
-"""Ship the pre-rendered front page as this entry's output.
+"""Run the round-2 front page and write it to the harness output dir.
 
-The picture itself lives in ``entry.png`` next to this file (drawn by
-``gen_image.py`` with Pillow only). This script just copies that file to
-the place the make.fun harness expects it:
+This entrypoint draws the picture itself (via ``gen_image.render``) and
+writes ``entry.png`` where the make.fun harness expects it:
 
 * ``$MAKEFUN_OUTPUT_DIR/entry.png`` when the variable is set, else
-* the directory given as the first command-line argument, else
+* the directory passed as the first command-line argument, else
 * ``./output/entry.png``.
 
-Standard library only. No network, no clock, no randomness — the same
-input always produces the same bytes.
+Standard library plus Pillow (the same library ``gen_image`` uses).
+No network, no clock, no randomness: the same run always writes the
+same bytes.
 """
 
 import os
-import shutil
 import sys
 
 
-def pick_output_dir(argv):
-    """Decide where the finished image goes, in priority order."""
+def _here():
+    """Directory holding this file, so the import works from anywhere."""
+    return os.path.dirname(os.path.abspath(__file__))
+
+
+def pick_dir(argv):
+    """Choose the output directory, in priority order."""
     env_dir = os.environ.get("MAKEFUN_OUTPUT_DIR")
     if env_dir:
         return env_dir
@@ -29,18 +33,17 @@ def pick_output_dir(argv):
 
 
 def main(argv):
-    here = os.path.dirname(os.path.abspath(__file__))
-    source = os.path.join(here, "entry.png")
-    if not os.path.isfile(source):
-        raise SystemExit("entry.png is missing next to main.py — "
-                         "run gen_image.py first")
-    dest_dir = pick_output_dir(argv)
-    os.makedirs(dest_dir, exist_ok=True)
-    dest = os.path.join(dest_dir, "entry.png")
-    shutil.copyfile(source, dest)
-    size = os.path.getsize(dest)
-    print("copied entry.png to %s (%d bytes)" % (dest, size))
+    """Draw the front page into the chosen output directory."""
+    sys.path.insert(0, _here())
+    import gen_image
+
+    out_dir = pick_dir(argv)
+    os.makedirs(out_dir, exist_ok=True)
+    target = os.path.join(out_dir, "entry.png")
+    gen_image.render(target)
+    print("wrote", target)
+    return 0
 
 
 if __name__ == "__main__":
-    main(sys.argv)
+    raise SystemExit(main(sys.argv))
